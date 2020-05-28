@@ -3,6 +3,8 @@ import subprocess
 from datetime import date
 os.system('cls')
 
+danas = date.today()
+
 def pokreni_komandu(komanda):
     proces = subprocess.Popen(komanda, stdout=subprocess.PIPE, shell=True)
     (output, err) = proces.communicate()
@@ -16,10 +18,13 @@ pokreni_komandu('tar --force-local --exclude-vcs --overwrite -C C:/laragon/www/w
 print('Sivonja kompresuje Planetu...')
 pokreni_komandu('tar --force-local --exclude-vcs --overwrite -C C:/laragon/www/wordpress/wp-content/themes/planeta -cf planeta.zip .')
 
-print('Sivonja pravi bekap...')
-danas = date.today()
-pokreni_komandu('mkdir backup')
-pokreni_komandu('tar --force-local --exclude-vcs --overwrite -C C:/laragon/www/wordpress/wp-content/themes/planeta -cf backup/planeta-' + str(danas) + '.zip .')
+print('Sivonja pravi bekap jezgra...')
+pokreni_komandu('mkdir planeta-core-backup')
+pokreni_komandu('tar --force-local --exclude-vcs --overwrite -C C:/laragon/www/wordpress/wp-content/plugins/ -cf planeta-core-backup/planeta-core-' + str(danas) + '.zip planeta-core')
+
+print('Sivonja pravi bekap Planete...')
+pokreni_komandu('mkdir planeta-backup')
+pokreni_komandu('tar --force-local --exclude-vcs --overwrite -C C:/laragon/www/wordpress/wp-content/themes/planeta -cf planeta-backup/planeta-' + str(danas) + '.zip .')
 
 for i in range(1, 3):
     print('Sivonja kopira jezgro u wordpress-demo-' + str(i) + '...')
