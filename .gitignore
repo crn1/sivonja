@@ -2,3 +2,5 @@ planeta.zip
 planeta-backup
 planeta-core-backup
 sivonja.exe
+*.sw*
+__pycache__
